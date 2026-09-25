@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://dh1bal4tdmnct"]
+
+[ext_resource type="Script" uid="uid://khj7d7tofqdn" path="res://characters/player.gd" id="1_dnjla"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fxs14"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_fxs14"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fxs14"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_rkr2n"]
+
+[node name="Player" type="CharacterBody3D" unique_id=453557030]
+script = ExtResource("1_dnjla")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1260353126]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual" unique_id=1371226943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_fxs14")
+
+[node name="Cone" type="MeshInstance3D" parent="Visual" unique_id=1211997385]
+transform = Transform3D(0.5, 0, 0, 0, 0.6, 0, 0, 0, 0.39999998, 0, 2, 0)
+mesh = SubResource("PrismMesh_fxs14")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1083822878]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_fxs14")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=616159853]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1200827227]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_rkr2n")
