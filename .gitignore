@@ -1,3 +1,11 @@
-# Godot 4+ specific ignores
+~*.dll
 .godot/
-/android/
+.nomedia
+.import/
+export.cfg
+export_credentials.cfg
+*.tmp
+*.translation
+.mono/
+data_*/
+mono_crash.*.json
