@@ -10,7 +10,7 @@
 <img width="1152" height="648" alt="Screenshot_20260927_230724" src="https://github.com/user-attachments/assets/ffff49ca-611e-4ece-b87b-f47df1dbad82" />
 
 
-There are 6 bananas hidden within the scene. Find all of them and you win!
+There are 6 bananas hidden within the scene. Find all of them and you win! Can be played [here](https://ankushroy.itch.io/hidden-banana)
 
 ##### Controls
 
