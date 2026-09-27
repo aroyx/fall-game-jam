@@ -1,0 +1,385 @@
+[gd_scene format=3 uid="uid://dwwo4ta8tpkh0"]
+
+[ext_resource type="Script" uid="uid://cnk4n7trjg1j3" path="res://levels/main.gd" id="1_6et1j"]
+[ext_resource type="PackedScene" uid="uid://dh1bal4tdmnct" path="res://characters/player.tscn" id="2_6et1j"]
+[ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_etqu2"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="4_jw1n3"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="5_xdh4e"]
+[ext_resource type="Script" uid="uid://b8hhnqsugykly" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="6_c7dyn"]
+[ext_resource type="Script" uid="uid://bd1w7hml2jkxv" path="res://levels/enter_area_camera.gd" id="7_1fput"]
+[ext_resource type="PackedScene" uid="uid://b15l6xx8aparg" path="res://levels/island.tscn" id="8_6et1j"]
+[ext_resource type="PackedScene" uid="uid://g7xx5s7m65ne" path="res://levels/room.tscn" id="9_4fc0e"]
+[ext_resource type="AudioStream" uid="uid://diywl6aksqi8p" path="res://assets/audio/bgm.wav" id="9_etqu2"]
+[ext_resource type="Texture2D" uid="uid://nsnllbjmdnuc" path="res://assets/play.png" id="10_c7dyn"]
+[ext_resource type="StyleBox" uid="uid://bd402jbl2expt" path="res://ui/new_style_box_flat.tres" id="10_xdh4e"]
+[ext_resource type="Texture2D" uid="uid://cq51j16ldehsw" path="res://assets/settings.png" id="11_1fput"]
+[ext_resource type="Texture2D" uid="uid://c5savu8qxuwe0" path="res://assets/cross.png" id="12_6yxbg"]
+[ext_resource type="Texture2D" uid="uid://b4bp2kxt23qm6" path="res://assets/back.png" id="14_6yxbg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8hd6v"]
+sky_top_color = Color(0.078431375, 0.41960785, 0.8509804, 1)
+sky_horizon_color = Color(0.54901963, 0.9019608, 0.98039216, 1)
+ground_bottom_color = Color(0.12156863, 0.52156866, 0.5803922, 1)
+ground_horizon_color = Color(0.12156863, 0.52156866, 0.5803922, 1)
+
+[sub_resource type="Sky" id="Sky_045es"]
+sky_material = SubResource("ProceduralSkyMaterial_8hd6v")
+
+[sub_resource type="Environment" id="Environment_omn1t"]
+background_mode = 2
+sky = SubResource("Sky_045es")
+tonemap_mode = 3
+tonemap_exposure = 1.05
+fog_enabled = true
+fog_light_color = Color(0.060036577, 0.06960341, 0.08448995, 1)
+fog_light_energy = 1.51
+fog_sun_scatter = 0.27
+fog_aerial_perspective = 0.577
+fog_sky_affect = 0.398
+fog_height = -8.85
+fog_depth_curve = 0.30778736
+fog_depth_begin = 1233.0
+fog_depth_end = 2266.0
+
+[sub_resource type="Resource" id="Resource_omn1t"]
+script = ExtResource("5_xdh4e")
+duration = 0.3
+transition = 1
+metadata/_custom_type_script = "uid://8umksf8e80fw"
+
+[sub_resource type="Resource" id="Resource_pdpul"]
+script = ExtResource("6_c7dyn")
+h_offset = 0.27
+v_offset = 0.52
+size = 0.1
+metadata/_custom_type_script = "uid://b8hhnqsugykly"
+
+[sub_resource type="Resource" id="Resource_61w3m"]
+script = ExtResource("5_xdh4e")
+duration = 0.425
+transition = 1
+
+[sub_resource type="Resource" id="Resource_lf3p4"]
+script = ExtResource("6_c7dyn")
+metadata/_custom_type_script = "uid://b8hhnqsugykly"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fxs14"]
+size = Vector3(6.787697, 3.9882946, 6.4010124)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1bqu"]
+albedo_color = Color(0.12156863, 0.52156866, 0.5803922, 1)
+
+[sub_resource type="Resource" id="Resource_etqu2"]
+script = ExtResource("5_xdh4e")
+duration = 0.28
+transition = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c7dyn"]
+bg_color = Color(0.91536325, 0.91147906, 0.9095384, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xdh4e"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Theme" id="Theme_fxs14"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxs14"]
+bg_color = Color(0, 0.8235294, 0.8235294, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1fput"]
+bg_color = Color(0.9411765, 0.44313726, 0.40392157, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Node3D" type="Node3D" unique_id=369691222]
+script = ExtResource("1_6et1j")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=809726060]
+environment = SubResource("Environment_omn1t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1684284615]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.9
+shadow_enabled = true
+
+[node name="Player" parent="." unique_id=638156752 node_paths=PackedStringArray("_camera") instance=ExtResource("2_6et1j")]
+transform = Transform3D(-0.740068, 0, 0.672532, 0, 1, 0, -0.672532, 0, -0.740068, 15.987051, 1.0138087, -8.780371)
+SPEED = 3.0
+JUMP_VELOCITY = 3.0
+_camera = NodePath("../Camera3D")
+
+[node name="RespawnPoint" type="Marker3D" parent="." unique_id=528184320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.182158, 1.6671631, -8.326605)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1693767067]
+transform = Transform3D(-0.7144728, -0.26096585, 0.64917296, 0, 0.92783624, 0.37298778, -0.6996633, 0.26648962, -0.66291374, 17.072464, 1.9294395, -10.290024)
+top_level = true
+h_offset = 0.27
+v_offset = 0.52
+size = 0.1
+
+[node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=222152019]
+process_priority = 300
+process_physics_priority = 300
+script = ExtResource("3_etqu2")
+metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="PlayerCam" type="Node3D" parent="." unique_id=850731443 node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(-0.7400682, 0, 0.67253166, 0, 1, 0, -0.67253166, 0, -0.7400682, 16.575516, 1.0138087, -9.42793)
+script = ExtResource("4_jw1n3")
+priority = 10
+follow_mode = 6
+follow_target = NodePath("../Player")
+tween_resource = SubResource("Resource_omn1t")
+tween_on_load = false
+camera_3d_resource = SubResource("Resource_pdpul")
+follow_damping = true
+follow_distance = 0.875
+spring_length = 0.875
+align_transform_with_view = Callable()
+align_position_with_view = Callable()
+align_rotation_with_view = Callable()
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="Room1Cam" type="Node3D" parent="." unique_id=265105156]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1068974, 2.3235786, -6.324335)
+
+[node name="PhantomCamera3D" type="Node3D" parent="Room1Cam" unique_id=1255028137 node_paths=PackedStringArray("look_at_target")]
+transform = Transform3D(0.5122615, -0.35635504, 0.7814086, -1.192093e-07, 0.9098526, 0.41493124, -0.8588297, -0.21255328, 0.4660825, 19.478468, 1.6695168, 0.8830776)
+script = ExtResource("4_jw1n3")
+look_at_mode = 2
+look_at_target = NodePath("../../Player")
+tween_resource = SubResource("Resource_61w3m")
+camera_3d_resource = SubResource("Resource_lf3p4")
+look_at_damping = true
+look_at_damping_value = 0.226
+align_transform_with_view = Callable()
+align_rotation_with_view = Callable()
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="Area3D" type="Area3D" parent="Room1Cam" unique_id=1223011335 node_paths=PackedStringArray("area_pcam", "player_cam")]
+script = ExtResource("7_1fput")
+area_pcam = NodePath("../PhantomCamera3D")
+player_cam = NodePath("../../PlayerCam")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room1Cam/Area3D" unique_id=510218943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.786104, -1.0590663, -1.8612566)
+shape = SubResource("BoxShape3D_fxs14")
+
+[node name="island" parent="." unique_id=1173444047 instance=ExtResource("8_6et1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7065067, 0, 0.10734701)
+
+[node name="room" parent="." unique_id=1456788377 instance=ExtResource("9_4fc0e")]
+transform = Transform3D(0.515, 0, 0, 0, 0.515, 0, 0, 0, 0.515, 2.730334, 2.193, -6.9396534)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1175802619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -62.405106, -0.009654999, -4.939745)
+size = Vector3(215.427, 0.385, 152.469)
+material = SubResource("StandardMaterial3D_a1bqu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1500838778]
+stream = ExtResource("9_etqu2")
+volume_db = 0.145
+autoplay = true
+
+[node name="StartingCamera" type="Node3D" parent="." unique_id=78584702]
+transform = Transform3D(-0.7144728, -0.26096585, 0.64917296, 0, 0.92783624, 0.37298778, -0.6996633, 0.26648962, -0.66291374, 17.072464, 1.9294395, -10.290024)
+script = ExtResource("4_jw1n3")
+priority = 348
+tween_resource = SubResource("Resource_etqu2")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="UI" type="Control" parent="." unique_id=1140481142]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI" unique_id=243085505]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -147.5
+offset_bottom = 147.5
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 73
+
+[node name="MainMenu" type="VBoxContainer" parent="UI/MarginContainer" unique_id=985918170]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 17
+
+[node name="Start" type="Button" parent="UI/MarginContainer/MainMenu" unique_id=1653348912]
+modulate = Color(0, 0.8235294, 0.8235294, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("10_xdh4e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c7dyn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xdh4e")
+text = "Start  "
+icon = ExtResource("10_c7dyn")
+
+[node name="Settings" type="Button" parent="UI/MarginContainer/MainMenu" unique_id=160777426]
+modulate = Color(0.99215686, 0.9882353, 0.8627451, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("10_xdh4e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c7dyn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xdh4e")
+text = "Settings  "
+icon = ExtResource("11_1fput")
+
+[node name="Quit" type="Button" parent="UI/MarginContainer/MainMenu" unique_id=1353511818]
+modulate = Color(0.9411765, 0.44313726, 0.40392157, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("10_xdh4e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c7dyn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xdh4e")
+text = "Quit  "
+icon = ExtResource("12_6yxbg")
+
+[node name="SettingsMenu" type="MarginContainer" parent="UI/MarginContainer" unique_id=490519522]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Settings" type="VBoxContainer" parent="UI/MarginContainer/SettingsMenu" unique_id=222498041]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme = SubResource("Theme_fxs14")
+
+[node name="BGM" type="VBoxContainer" parent="UI/MarginContainer/SettingsMenu/Settings" unique_id=1863863408]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/SettingsMenu/Settings/BGM" unique_id=859368148]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_fxs14")
+text = "Background Music"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/SettingsMenu/Settings/BGM" unique_id=1995581204]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Slider" type="HSlider" parent="UI/MarginContainer/SettingsMenu/Settings/BGM/MarginContainer" unique_id=435950506]
+layout_mode = 2
+max_value = 3.0
+step = 0.05
+value = 1.0
+
+[node name="SFX" type="VBoxContainer" parent="UI/MarginContainer/SettingsMenu/Settings" unique_id=690444677]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="UI/MarginContainer/SettingsMenu/Settings/SFX" unique_id=1782469488]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_1fput")
+text = "Sound Effects"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/SettingsMenu/Settings/SFX" unique_id=910288021]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Slider" type="HSlider" parent="UI/MarginContainer/SettingsMenu/Settings/SFX/MarginContainer" unique_id=1326483426]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Back" type="Button" parent="UI/MarginContainer/SettingsMenu/Settings" unique_id=1945265843]
+modulate = Color(3.85046e-07, 0.65195143, 0.99149686, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("10_xdh4e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c7dyn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xdh4e")
+text = "Back  "
+icon = ExtResource("14_6yxbg")
+
+[connection signal="pressed" from="UI/MarginContainer/MainMenu/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/MainMenu/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/MainMenu/Quit" to="." method="_on_quit_pressed"]
+[connection signal="value_changed" from="UI/MarginContainer/SettingsMenu/Settings/BGM/MarginContainer/Slider" to="." method="_on_bgm_slider_value_changed"]
+[connection signal="value_changed" from="UI/MarginContainer/SettingsMenu/Settings/SFX/MarginContainer/Slider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="UI/MarginContainer/SettingsMenu/Settings/Back" to="." method="_on_back_pressed"]
