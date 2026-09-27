@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ep776ipga6bv"]
+
+[ext_resource type="PackedScene" uid="uid://uyi2tne2auki" path="res://assets/land/low_poly_banana.glb" id="1_mqock"]
+[ext_resource type="Script" uid="uid://c856vnu2awinl" path="res://decor/banana.gd" id="1_xtwce"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s07ge"]
+albedo_color = Color(0.7137255, 0.59607846, 0, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mqock"]
+points = PackedVector3Array(-0.13254166, -140.54355, 71.262054, -5.3257523, -118.43831, 65.58127, -24.364866, -118.7334, 57.462376, -10.415573, -145.3033, 65.6788, -0.38703156, -151.82068, 62.253254, 42.971886, -37.035126, -41.415077, 42.693535, -30.87696, -42.146507, 26.08799, -29.068, -21.02031, -23.291231, -82.34892, 39.810474, 1.2910156, -41.91033, 4.555439, -18.352514, -53.00785, 17.940647, -26.893871, -132.26852, 52.634922, -37.320053, -96.21762, 31.264904, -9.866827, -149.22913, 58.571712, -16.801708, -137.51578, 34.727016, -3.504551, -136.11737, 34.800167, 42.240227, -42.692932, -48.217396, 43.23433, -36.84268, -53.27647, 28.768105, -21.485764, -38.343063, 11.955784, -20.754486, -23.031746, -36.819023, -75.690414, 17.270168, -27.553957, -57.664963, 14.880825, -11.123377, -34.392242, -1.5885925, -28.977516, -130.71616, 35.83636, -38.003998, -90.95752, 15.478161, 16.520718, -41.16622, -52.43532, -33.876472, -98.46278, 9.382893, -23.768402, -98.11638, 3.5436249, 36.49032, -32.198402, -50.972458, 16.321896, -25.69384, -49.582737, 2.507801, -21.562744, -31.309122, -28.59578, -48.158302, -8.878532, -28.826412, -73.22715, -12.645409, -2.5740662, -41.063583, -43.49966, -2.5820198, -27.323189, -38.416206, -21.485935, -48.64582, -24.128895)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xtwce"]
+points = PackedVector3Array(61.25154, -36.475533, -60.58417, 64.6102, -31.765335, -54.04329, 71.9498, -37.60204, -47.618805, 69.085495, -45.260864, -53.76731, 42.24243, -42.691025, -48.20831, 43.23985, -36.836014, -53.277306, 42.698975, -30.875397, -42.138657, 42.975227, -37.024704, -41.406467)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fxs14"]
+
+[node name="Banana" type="Node3D" unique_id=509313142 groups=["banana"]]
+script = ExtResource("1_xtwce")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=2012413834]
+
+[node name="BananaModel" parent="RigidBody3D" unique_id=1044015177 instance=ExtResource("1_mqock")]
+
+[node name="Sketchfab_model" parent="RigidBody3D/BananaModel" index="0" unique_id=1717594234]
+transform = Transform3D(-0.13777485, -0.14489232, 0.0049300813, 0.13749985, -0.13275021, -0.058916684, 0.045955222, -0.037196763, 0.19106156, 0, 0, 0)
+
+[node name="low_poly_banana_obj_cleaner_materialmerger_gles" parent="RigidBody3D/BananaModel/Sketchfab_model" index="0" unique_id=1394910831]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
+
+[node name="Object_2" parent="RigidBody3D/BananaModel/Sketchfab_model/low_poly_banana_obj_cleaner_materialmerger_gles" index="0" unique_id=538311951]
+surface_material_override/0 = SubResource("StandardMaterial3D_s07ge")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1167945318]
+transform = Transform3D(-0.0013777486, -0.0014489231, 4.9300812e-05, 0.0013749985, -0.0013275021, -0.0005891668, 0.00045955222, -0.00037196762, 0.0019106155, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_mqock")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="RigidBody3D" unique_id=202006219]
+transform = Transform3D(-0.0013777486, -0.0014489231, 4.9300812e-05, 0.0013749985, -0.0013275021, -0.0005891668, 0.00045955222, -0.00037196762, 0.0019106155, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_xtwce")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=594908038]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=2102822462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.122232854, 0.08143446, 0.026377201)
+shape = SubResource("SphereShape3D_fxs14")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+
+[editable path="RigidBody3D/BananaModel"]

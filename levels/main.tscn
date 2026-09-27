@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://cq51j16ldehsw" path="res://assets/settings.png" id="11_1fput"]
 [ext_resource type="Texture2D" uid="uid://c5savu8qxuwe0" path="res://assets/cross.png" id="12_6yxbg"]
 [ext_resource type="Texture2D" uid="uid://b4bp2kxt23qm6" path="res://assets/back.png" id="14_6yxbg"]
+[ext_resource type="PackedScene" uid="uid://ep776ipga6bv" path="res://decor/banana.tscn" id="16_21ko3"]
+[ext_resource type="Texture2D" uid="uid://65f33qm1st77" path="res://assets/banana.png" id="16_s07ge"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8hd6v"]
 sky_top_color = Color(0.078431375, 0.41960785, 0.8509804, 1)
@@ -64,7 +66,13 @@ script = ExtResource("6_c7dyn")
 metadata/_custom_type_script = "uid://b8hhnqsugykly"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fxs14"]
-size = Vector3(6.787697, 3.9882946, 6.4010124)
+size = Vector3(6.88674, 4.235236, 6.5608983)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s07ge"]
+size = Vector3(4.651538, 3.9882946, 4.7767963)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iwo8l"]
+size = Vector3(2.3575654, 2.0782487, 3.2719042)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a1bqu"]
 albedo_color = Color(0.12156863, 0.52156866, 0.5803922, 1)
@@ -124,6 +132,15 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_fxs14"]
+radius = 0.69263047
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s07ge"]
+radius = 0.44235614
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iwo8l"]
+radius = 0.679474
+
 [node name="Node3D" type="Node3D" unique_id=369691222]
 script = ExtResource("1_6et1j")
 
@@ -147,9 +164,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.182158, 1.6671631, -8.3266
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1693767067]
 transform = Transform3D(-0.7144728, -0.26096585, 0.64917296, 0, 0.92783624, 0.37298778, -0.6996633, 0.26648962, -0.66291374, 17.072464, 1.9294395, -10.290024)
 top_level = true
-h_offset = 0.27
-v_offset = 0.52
-size = 0.1
 
 [node name="PhantomCameraHost" type="Node" parent="Camera3D" unique_id=222152019]
 process_priority = 300
@@ -158,7 +172,7 @@ script = ExtResource("3_etqu2")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
 [node name="PlayerCam" type="Node3D" parent="." unique_id=850731443 node_paths=PackedStringArray("follow_target")]
-transform = Transform3D(-0.7400682, 0, 0.67253166, 0, 1, 0, -0.67253166, 0, -0.7400682, 16.575516, 1.0138087, -9.42793)
+transform = Transform3D(-0.7400675, 0, 0.67253256, 0, 1, 0, -0.67253256, 0, -0.7400675, 16.71675, 1.0138087, -9.583344)
 script = ExtResource("4_jw1n3")
 priority = 10
 follow_mode = 6
@@ -167,8 +181,8 @@ tween_resource = SubResource("Resource_omn1t")
 tween_on_load = false
 camera_3d_resource = SubResource("Resource_pdpul")
 follow_damping = true
-follow_distance = 0.875
-spring_length = 0.875
+follow_distance = 1.085
+spring_length = 1.085
 align_transform_with_view = Callable()
 align_position_with_view = Callable()
 align_rotation_with_view = Callable()
@@ -196,8 +210,58 @@ area_pcam = NodePath("../PhantomCamera3D")
 player_cam = NodePath("../../PlayerCam")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Room1Cam/Area3D" unique_id=510218943]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.786104, -1.0590663, -1.8612566)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.78396, -0.9355955, -1.5241661)
 shape = SubResource("BoxShape3D_fxs14")
+
+[node name="Room1Cam2" type="Node3D" parent="." unique_id=525385767]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1068974, 2.3235786, -6.324335)
+
+[node name="PhantomCamera3D" type="Node3D" parent="Room1Cam2" unique_id=1628352834 node_paths=PackedStringArray("look_at_target")]
+transform = Transform3D(-0.2738208, 0.16944776, -0.9467365, -2.753735e-05, 0.98435605, 0.17618905, 0.96178097, 0.048270255, -0.2695326, 1.4751186, 1.0008233, -5.9995785)
+script = ExtResource("4_jw1n3")
+look_at_mode = 2
+look_at_target = NodePath("../../Player")
+tween_resource = SubResource("Resource_61w3m")
+camera_3d_resource = SubResource("Resource_lf3p4")
+look_at_damping = true
+look_at_damping_value = 0.226
+align_transform_with_view = Callable()
+align_rotation_with_view = Callable()
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="Area3D" type="Area3D" parent="Room1Cam2" unique_id=1255118813 node_paths=PackedStringArray("area_pcam", "player_cam")]
+script = ExtResource("7_1fput")
+area_pcam = NodePath("../PhantomCamera3D")
+player_cam = NodePath("../../PlayerCam")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room1Cam2/Area3D" unique_id=1270756206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8548956, -1.0590658, -8.47869)
+shape = SubResource("BoxShape3D_s07ge")
+
+[node name="Room1Cam3" type="Node3D" parent="." unique_id=1670320373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1068974, 2.3235786, -6.324335)
+
+[node name="PhantomCamera3D" type="Node3D" parent="Room1Cam3" unique_id=1326812658 node_paths=PackedStringArray("look_at_target")]
+transform = Transform3D(0.18825124, 0.10417815, -0.9765802, -2.6568776e-05, 0.9943584, 0.10606966, 0.98212117, -0.01994179, 0.18719201, -8.5312, 1.1221704, 1.8571582)
+script = ExtResource("4_jw1n3")
+look_at_mode = 2
+look_at_target = NodePath("../../Player")
+tween_resource = SubResource("Resource_61w3m")
+camera_3d_resource = SubResource("Resource_lf3p4")
+look_at_damping = true
+look_at_damping_value = 0.226
+align_transform_with_view = Callable()
+align_rotation_with_view = Callable()
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="Area3D" type="Area3D" parent="Room1Cam3" unique_id=807748337 node_paths=PackedStringArray("area_pcam", "player_cam")]
+script = ExtResource("7_1fput")
+area_pcam = NodePath("../PhantomCamera3D")
+player_cam = NodePath("../../PlayerCam")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room1Cam3/Area3D" unique_id=118686000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9329257, 0.49228024, 1.4449034)
+shape = SubResource("BoxShape3D_iwo8l")
 
 [node name="island" parent="." unique_id=1173444047 instance=ExtResource("8_6et1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7065067, 0, 0.10734701)
@@ -223,6 +287,7 @@ tween_resource = SubResource("Resource_etqu2")
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="UI" type="Control" parent="." unique_id=1140481142]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -377,9 +442,270 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_xdh4e")
 text = "Back  "
 icon = ExtResource("14_6yxbg")
 
+[node name="BananaCounter" type="MarginContainer" parent="UI" unique_id=675618548]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 28
+
+[node name="BananaCount" type="HBoxContainer" parent="UI/BananaCounter" unique_id=97914170]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="ColorRect1" type="ColorRect" parent="UI/BananaCounter/BananaCount" unique_id=232733863]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+color = Color(0.8235294, 0.94509804, 0, 0.28627452)
+
+[node name="TextureRect" type="TextureRect" parent="UI/BananaCounter/BananaCount/ColorRect1" unique_id=166452160]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -52.0
+offset_right = 61.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5934119
+scale = Vector2(-1.515, 1.515)
+texture = ExtResource("16_s07ge")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ColorRect2" type="ColorRect" parent="UI/BananaCounter/BananaCount" unique_id=1584024238]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+color = Color(0.8235294, 0.94509804, 0, 0.28627452)
+
+[node name="TextureRect" type="TextureRect" parent="UI/BananaCounter/BananaCount/ColorRect2" unique_id=1399415054]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -52.0
+offset_right = 61.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5934119
+scale = Vector2(-1.515, 1.515)
+texture = ExtResource("16_s07ge")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ColorRect3" type="ColorRect" parent="UI/BananaCounter/BananaCount" unique_id=188880881]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+color = Color(0.8235294, 0.94509804, 0, 0.28627452)
+
+[node name="TextureRect" type="TextureRect" parent="UI/BananaCounter/BananaCount/ColorRect3" unique_id=369956143]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -52.0
+offset_right = 61.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5934119
+scale = Vector2(-1.515, 1.515)
+texture = ExtResource("16_s07ge")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ColorRect4" type="ColorRect" parent="UI/BananaCounter/BananaCount" unique_id=686910124]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+color = Color(0.8235294, 0.94509804, 0, 0.28627452)
+
+[node name="TextureRect" type="TextureRect" parent="UI/BananaCounter/BananaCount/ColorRect4" unique_id=688850319]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -52.0
+offset_right = 61.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5934119
+scale = Vector2(-1.515, 1.515)
+texture = ExtResource("16_s07ge")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ColorRect5" type="ColorRect" parent="UI/BananaCounter/BananaCount" unique_id=1250970754]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+color = Color(0.8235294, 0.94509804, 0, 0.28627452)
+
+[node name="TextureRect" type="TextureRect" parent="UI/BananaCounter/BananaCount/ColorRect5" unique_id=1463433515]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -52.0
+offset_right = 61.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5934119
+scale = Vector2(-1.515, 1.515)
+texture = ExtResource("16_s07ge")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ColorRect6" type="ColorRect" parent="UI/BananaCounter/BananaCount" unique_id=1651027718]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+color = Color(0.8235294, 0.94509804, 0, 0.28627452)
+
+[node name="TextureRect" type="TextureRect" parent="UI/BananaCounter/BananaCount/ColorRect6" unique_id=15772462]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = -52.0
+offset_right = 61.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.5934119
+scale = Vector2(-1.515, 1.515)
+texture = ExtResource("16_s07ge")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="GameWin" type="VBoxContainer" parent="UI" unique_id=2115501927]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.5
+offset_top = -57.0
+offset_right = 106.5
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 22
+
+[node name="Label" type="Label" parent="UI/GameWin" unique_id=1357577282]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 73
+text = "You Win!!"
+
+[node name="Quit" type="Button" parent="UI/GameWin" unique_id=1407003482]
+modulate = Color(0.9411765, 0.44313726, 0.40392157, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("10_xdh4e")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c7dyn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_xdh4e")
+text = "Quit  "
+icon = ExtResource("12_6yxbg")
+
+[node name="bananas" type="Node3D" parent="." unique_id=1926574906]
+
+[node name="Banana" parent="bananas" unique_id=509313142 instance=ExtResource("16_21ko3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.698096, 1.5834129, -11.084401)
+
+[node name="Banana2" parent="bananas" unique_id=1766330872 instance=ExtResource("16_21ko3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9301133, 4.319689, -5.6515894)
+
+[node name="Banana3" parent="bananas" unique_id=1791278910 instance=ExtResource("16_21ko3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.140035, 1.4886785, -1.4629124)
+
+[node name="Breakables" type="Node3D" parent="." unique_id=1812094767]
+
+[node name="Box1" type="Area3D" parent="Breakables" unique_id=1532162294]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Breakables/Box1" unique_id=667179015]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.8521986, 1.4858583, -7.270214)
+shape = SubResource("SphereShape3D_fxs14")
+
+[node name="Marker3D" type="Marker3D" parent="Breakables/Box1/CollisionShape3D" unique_id=1707122632]
+
+[node name="Box2" type="Area3D" parent="Breakables" unique_id=2118727899]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Breakables/Box2" unique_id=760403966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3323603, 1.4085307, -6.5538306)
+shape = SubResource("SphereShape3D_fxs14")
+
+[node name="Treasure1" type="Area3D" parent="Breakables" unique_id=1700334362]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Breakables/Treasure1" unique_id=1912995771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7903938, 1.4085307, 9.167794)
+shape = SubResource("SphereShape3D_s07ge")
+
+[node name="Marker3D" type="Marker3D" parent="Breakables/Treasure1/CollisionShape3D" unique_id=1438293722]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01947701, 0, -0.9067669)
+
+[node name="Treasure2" type="Area3D" parent="Breakables" unique_id=628588422]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Breakables/Treasure2" unique_id=1255583596]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.212084, 1.2742448, -18.974218)
+shape = SubResource("SphereShape3D_iwo8l")
+
+[node name="Marker3D" type="Marker3D" parent="Breakables/Treasure2/CollisionShape3D" unique_id=1900358947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21643066, 0.5882022, -1.663929)
+
 [connection signal="pressed" from="UI/MarginContainer/MainMenu/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/MainMenu/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/MainMenu/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="UI/MarginContainer/SettingsMenu/Settings/BGM/MarginContainer/Slider" to="." method="_on_bgm_slider_value_changed"]
 [connection signal="value_changed" from="UI/MarginContainer/SettingsMenu/Settings/SFX/MarginContainer/Slider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="UI/MarginContainer/SettingsMenu/Settings/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="UI/GameWin/Quit" to="." method="_on_quit_on_win_pressed"]
+[connection signal="body_entered" from="Breakables/Box1" to="." method="_on_box_1_body_entered"]
+[connection signal="body_exited" from="Breakables/Box1" to="." method="_on_box_1_body_exited"]
+[connection signal="body_entered" from="Breakables/Box2" to="." method="_on_box_2_body_entered"]
+[connection signal="body_exited" from="Breakables/Box2" to="." method="_on_box_2_body_exited"]
+[connection signal="body_entered" from="Breakables/Treasure1" to="." method="_on_treasure_1_body_entered"]
+[connection signal="body_exited" from="Breakables/Treasure1" to="." method="_on_treasure_1_body_exited"]
+[connection signal="body_entered" from="Breakables/Treasure2" to="." method="_on_treasure_2_body_entered"]
+[connection signal="body_exited" from="Breakables/Treasure2" to="." method="_on_treasure_2_body_exited"]

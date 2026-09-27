@@ -2,6 +2,7 @@
 .godot/
 .nomedia
 .import/
+export/
 export.cfg
 export_credentials.cfg
 *.tmp

@@ -14,6 +14,8 @@ extends Node3D
 
 @onready var settings_menu: MarginContainer = $UI/MarginContainer/SettingsMenu
 @onready var main_menu: VBoxContainer = $UI/MarginContainer/MainMenu
+@onready var banana_counter_ui: MarginContainer = $UI/BananaCounter
+@onready var game_win_ui: VBoxContainer = $UI/GameWin
 
 @onready var starting_camera: PhantomCamera3D = $StartingCamera
 @onready var island: Node3D = $island
@@ -31,6 +33,8 @@ func _ready() -> void:
 	sfx_slider.value = clamp(player.audio_stream_player_3d.volume_linear, 0, 1)
 	
 	settings_menu.hide()
+	banana_counter_ui.hide()
+	game_win_ui.hide()
 
 func _on_camera_transition_started() -> void:
 	if is_instance_valid(player):
@@ -55,6 +59,12 @@ func _process(_delta: float) -> void:
 		#island.delete_box1()
 	elif Input.is_action_just_pressed("interact") and started and not paused:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		if not curr_break.is_empty():
+			break_shit(curr_break.pop_back())
+	
+	if Input.is_action_just_pressed("respawn"):
+		player.position = respawn_point.position
+		player.playInteractSound()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
@@ -76,11 +86,28 @@ func _set_pcam_rotation(pcam: PhantomCamera3D, event: InputEvent) -> void:
 var started = false
 var paused = true
 
+func banana_picked_up():
+	var index = BananaCounter.captured_bananas
+	var icon: TextureRect = get_node_or_null("UI/BananaCounter/BananaCount/ColorRect" + str(index) + "/TextureRect")
+	
+	if icon:
+		icon.show()
+
+func game_win():
+	started = false
+	pause()
+	main_menu.hide()
+	game_win_ui.show()
+	
+	await get_tree().create_timer(3).timeout
+	banana_counter_ui.hide()
+
 func _on_start_pressed() -> void:
 	if not started:
 		started = true
 		starting_camera.priority = -1
 		player.rotation.y = 0
+		banana_counter_ui.show()
 	resume()
 
 func pause():
@@ -113,3 +140,80 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 func _on_back_pressed() -> void:
 	settings_menu.hide()
 	main_menu.show()
+
+func _on_quit_on_win_pressed() -> void:
+	get_tree().quit()
+
+var banana_scene: PackedScene = preload("res://decor/banana.tscn")
+
+@onready var box_1_marker: Marker3D = $Breakables/Box1/CollisionShape3D/Marker3D
+@onready var treausre_1_marker: Marker3D = $Breakables/Treasure1/CollisionShape3D/Marker3D
+@onready var treasure_2_marker: Marker3D = $Breakables/Treasure2/CollisionShape3D/Marker3D
+
+var curr_break: Array[String]
+var already_broken: Array[String]
+
+func break_shit(item: String):
+	if item in already_broken:
+		return
+	curr_break.erase(item)
+	already_broken.append(item)
+	var marker: Marker3D
+	match item:
+		"box_1":
+			island.delete_box_1()
+			marker = box_1_marker
+		"box_2":
+			island.delete_box_2()
+			return
+		"treasure_chest_1":
+			island.delete_treasure_chest_1()
+			marker = treausre_1_marker
+		"treasure_chest_2":
+			island.delete_treasure_chest_2()
+			marker = treasure_2_marker
+	
+	await get_tree().process_frame
+	var banana: Node3D = banana_scene.instantiate()
+	add_child(banana)
+	banana.global_position = marker.global_position
+
+# When I changed curr_break's type from String to Array[String] I made AI generate this code to do what I was doing with String
+func _add_breakable(item_name: String) -> void:
+	if not (item_name in already_broken) and not (item_name in curr_break):
+		curr_break.append(item_name)
+
+func _remove_breakable(item_name: String) -> void:
+	curr_break.erase(item_name)
+
+func _on_box_1_body_entered(body: Node3D) -> void:
+	if body == player:
+		_add_breakable("box_1")
+
+func _on_box_1_body_exited(body: Node3D) -> void:
+	if body == player:
+		_remove_breakable("box_1")
+
+func _on_box_2_body_entered(body: Node3D) -> void:
+	if body == player:
+		_add_breakable("box_2")
+
+func _on_box_2_body_exited(body: Node3D) -> void:
+	if body == player:
+		_remove_breakable("box_2")
+
+func _on_treasure_1_body_entered(body: Node3D) -> void:
+	if body == player:
+		_add_breakable("treasure_chest_1")
+
+func _on_treasure_1_body_exited(body: Node3D) -> void:
+	if body == player:
+		_remove_breakable("treasure_chest_1")
+
+func _on_treasure_2_body_entered(body: Node3D) -> void:
+	if body == player:
+		_add_breakable("treasure_chest_2")
+
+func _on_treasure_2_body_exited(body: Node3D) -> void:
+	if body == player:
+		_remove_breakable("treasure_chest_2")
